@@ -9,20 +9,29 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log('You\ve clicked submit!');
                 return;
             }
-            let gameType = this.getAttribute('data-type');
-            alert(`You've clicked ${gameType}`);
+            let operation = this.getAttribute('data-type');
+            runGame(operation);
 
         });
     }
+
+    runGame('add');
 });
 
 /**
  * "The main game loop fires up as soon as the script loads, 
  * and it gets another shot after crunching the user's answers."
  */
-function runGame() {
+function runGame(operation) {
     let randomNum1 = Math.floor(Math.random() * 25 + 1);
     let randomNum2 = Math.floor(Math.random() * 25 + 1);
+
+    if (operation === 'add') {
+        displayAddtion(randomNum1, randomNum2);
+    } else {
+        alert(`Sorry. I can't hack that ${operation} :/`);
+        throw `Unknown opeartion: ${operation}. Quiting game`;
+    }
 }
 
 function checkAnswer() { }
@@ -33,7 +42,11 @@ function incrementScore() { }
 
 function incrementWrongAnswer() { }
 
-function displayAddtion() { }
+function displayAddtion(operand1, operand2) {
+    document.querySelector('#operand1').textContent = operand1;
+    document.querySelector('#operand2').textContent = operand2;
+    document.querySelector('#operator').textContent = '+';
+}
 
 function displayDivision() { }
 
