@@ -1,3 +1,5 @@
+// When the DOM is ready, we list the buttons and hook 'em up with 'onclick' listners.
+
 document.addEventListener('DOMContentLoaded', function () {
     let buttons = document.querySelectorAll('button');
 
@@ -14,7 +16,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-function runGame() { }
+/**
+ * "The main game loop fires up as soon as the script loads, 
+ * and it gets another shot after crunching the user's answers."
+ */
+function runGame() {
+    let randomNum1 = Math.floor(Math.random() * 25 + 1);
+    let randomNum2 = Math.floor(Math.random() * 25 + 1);
+}
 
 function checkAnswer() { }
 
