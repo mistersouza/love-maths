@@ -10,19 +10,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
             let operation = this.getAttribute('data-type');
-            runGame(operation);
+            play(operation);
 
         });
     }
 
-    runGame('add');
+    play('add');
 });
 
 /**
  * "The main game loop fires up as soon as the script loads, 
  * and it gets another shot after crunching the user's answers."
  */
-function runGame(operation) {
+function play(operation) {
     let randomNum1 = Math.floor(Math.random() * 25 + 1);
     let randomNum2 = Math.floor(Math.random() * 25 + 1);
 
@@ -36,7 +36,26 @@ function runGame(operation) {
 
 function checkAnswer() { }
 
-function calculateCorrectAnswer() { }
+/**
+ * "Grab those two numbers and the operator, then hand me the right answer!"
+ */
+function calculateCorrectAnswer() {
+    let operand1 = Number.parseInt(document.querySelector('#operand1').innerText);
+    let operand2 = Number.parseInt(document.querySelector('#operant2'.innerText));
+    let operator = document.querySelector('#operator').innerText;
+
+    switch (operator) {
+        case '+':
+            return [operand1 + operand2, 'add'];
+        case '-':
+            return [operand1 - operand2, 'multiply'];
+        case '*':
+            return [operand1 * operand2, 'divide'];
+        default:
+            alert(`${operator} isn't avalaible`)
+            throw `Unimplemented operator: ${operator}. Quiting game`
+    }
+}
 
 function incrementScore() { }
 
