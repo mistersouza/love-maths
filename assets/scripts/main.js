@@ -30,9 +30,12 @@ function play(operation) {
     if (operation === "add") {
         displayAddition(num1, num2);
     } else if (operation === 'subtract') {
-        displayMultiply(num1, num2);
+        displaySubtract(num1, num2);
     } else if (operation === 'multiply') {
         displayMultiply(num1, num2);
+    }
+    else if (operation === 'divide') {
+        displayDivide(num1, num2);
     }
     else {
         alert(`We can't hack that ${operation} yet`);
@@ -98,18 +101,16 @@ function incrementScore(id) {
 }
 
 function displayAddition(operand1, operand2) {
-
     document.getElementById('operand-1').textContent = operand1;
     document.getElementById('operand-2').textContent = operand2;
     document.getElementById('operator').textContent = "+";
 
 }
 
-function displaySubtract() {
-    document.getElementById('operand-1').textContent = operand1;
-    document.getElementById('operand-2').textContent = operand2;
+function displaySubtract(operand1, operand2) {
+    document.getElementById('operand-1').textContent = operand1 > operand2 ? operand1 : operand2;
+    document.getElementById('operand-2').textContent = operand1 > operand2 ? operand2 : operand1;
     document.getElementById('operator').textContent = "-";
-
 }
 
 function displayMultiply(operand1, operand2) {
@@ -118,3 +119,8 @@ function displayMultiply(operand1, operand2) {
     document.getElementById('operator').textContent = "x";
 }
 
+function displayDivide (operand1, operand2) {
+    document.getElementById('operand-1').textContent = operand1 > operand2 ? operand1 : operand2;
+    document.getElementById('operand-2').textContent = operand1 > operand2 ? operand2 : operand1;
+    document.getElementById('operator').textContent = "/";
+}
