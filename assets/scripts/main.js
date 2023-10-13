@@ -1,5 +1,4 @@
 // When the DOM is ready, we list the buttons and hook 'em up with 'onclick' listners.t the button elements and add event listeners to them
-
 document.addEventListener("DOMContentLoaded", function () {
     let buttons = document.getElementsByTagName("button");
 
@@ -15,6 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     play("add");
+    // Keep an ear out for a 'keydown,' and if it's the 'Enter' key, call 'checkAnswer'
+    document.querySelector('#answer-box').addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') checkAnswer();
+    });
 
 });
 
@@ -23,7 +26,12 @@ document.addEventListener("DOMContentLoaded", function () {
  * and it gets another shot after crunching the user's answers.
  */
 function play(operation) {
-    // Creates two random numbers between 1 and 25
+
+    // Wipe out the input
+    document.querySelector('#answer-box').value = '';
+    // Get that cursor in position and good to roll
+    document.querySelector('#answer-box').focus();
+    // Whips up two random numbers between 1 and 25
     let num1 = Math.floor(Math.random() * 25) + 1;
     let num2 = Math.floor(Math.random() * 25) + 1;
 
@@ -119,7 +127,7 @@ function displayMultiply(operand1, operand2) {
     document.getElementById('operator').textContent = "x";
 }
 
-function displayDivide (operand1, operand2) {
+function displayDivide(operand1, operand2) {
     document.getElementById('operand-1').textContent = operand1 > operand2 ? operand1 : operand2;
     document.getElementById('operand-2').textContent = operand1 > operand2 ? operand2 : operand1;
     document.getElementById('operator').textContent = "/";
