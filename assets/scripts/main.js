@@ -29,7 +29,12 @@ function play(operation) {
 
     if (operation === "add") {
         displayAddition(num1, num2);
-    } else {
+    } else if (operation === 'subtract') {
+        displayMultiply(num1, num2);
+    } else if (operation === 'multiply') {
+        displayMultiply(num1, num2);
+    }
+    else {
         alert(`We can't hack that ${operation} yet`);
         throw `Operation unknown: ${operation}. Quiting`;
     }
@@ -67,12 +72,20 @@ function calculateCorrectAnswer() {
     let operand2 = parseInt(document.getElementById('operand-2').innerText);
     let operator = document.getElementById("operator").innerText;
 
-    if (operator === "+") {
-        return [operand1 + operand2, "add"];
-    } else {
-        alert(`Unimplemented operator ${operator}`);
-        throw `Unimplemented operator ${operator}. Quitin'`;
+    switch (operator) {
+        case '+':
+            return [operand1 + operand2, "add"];
+        case '-':
+            return [operand1 - operand2, "subtract"];
+        case 'x':
+            return [operand1 * operand2, "multiply"];
+        case '/':
+            return [operand1 / operand2, "divide"];
+        default:
+            alert(`We can't hack that yet: ${operator}. Sorry :/`);
+            throw `Unimplemented operator ${operator}. Quitin'`;
     }
+
 
 }
 
@@ -93,10 +106,15 @@ function displayAddition(operand1, operand2) {
 }
 
 function displaySubtract() {
+    document.getElementById('operand-1').textContent = operand1;
+    document.getElementById('operand-2').textContent = operand2;
+    document.getElementById('operator').textContent = "-";
 
 }
 
-function displayMultiply() {
-
+function displayMultiply(operand1, operand2) {
+    document.getElementById('operand-1').textContent = operand1;
+    document.getElementById('operand-2').textContent = operand2;
+    document.getElementById('operator').textContent = "x";
 }
 
