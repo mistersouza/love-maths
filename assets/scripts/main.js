@@ -45,9 +45,16 @@ function checkAnswer() {
     let [answer, operation] = calculateCorrectAnswer();
 
 
-    guess === answer
-        ? alert('You\'ve got it right. Way to go!')
-        : alert(`Awwww.... you've guessed ${guess}. The correct answer is ${answer}!`);
+    if (guess === answer) {
+        alert('You\'ve got it right. Way to go!');
+        incrementScore('#score');
+    }
+
+    if (guess !== answer) {
+        alert(`Awwww.... you've guessed ${guess}. The correct answer is ${answer}!`);
+        incrementScore('#mistakes');
+    }
+
     play(operation);
 
 }
@@ -69,12 +76,12 @@ function calculateCorrectAnswer() {
 
 }
 
-function incrementScore() {
-
-}
-
-function incrementWrongAnswer() {
-
+/**
+ * Bump up the score or mistakes by 1
+ */
+function incrementScore(id) {
+    let score = Number.parseInt(document.querySelector(id).innerText);
+    document.querySelector(id).innerText = ++score;
 }
 
 function displayAddition(operand1, operand2) {
