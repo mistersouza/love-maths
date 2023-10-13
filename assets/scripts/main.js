@@ -1,79 +1,95 @@
-// When the DOM is ready, we list the buttons and hook 'em up with 'onclick' listners.
+// When the DOM is ready, we list the buttons and hook 'em up with 'onclick' listners.t the button elements and add event listeners to them
 
-document.addEventListener('DOMContentLoaded', function () {
-    let buttons = document.querySelectorAll('button');
+document.addEventListener("DOMContentLoaded", function () {
+    let buttons = document.getElementsByTagName("button");
 
     for (let button of buttons) {
-        button.addEventListener('click', function () {
-            if (this.getAttribute('data-type' == 'submit')) {
-                console.log('You\ve clicked submit!');
+        button.addEventListener("click", function () {
+            if (this.getAttribute("data-type") === "submit") {
+                checkAnswer();
                 return;
             }
-            let operation = this.getAttribute('data-type');
+            let operation = this.getAttribute("data-type");
             play(operation);
-
         });
     }
 
-    play('add');
+    play("add");
+
 });
 
 /**
- * "The main game loop fires up as soon as the script loads, 
- * and it gets another shot after crunching the user's answers."
+ * The main game loop fires up as soon as the script loads, 
+ * and it gets another shot after crunching the user's answers.
  */
 function play(operation) {
-    let randomNum1 = Math.floor(Math.random() * 25 + 1);
-    let randomNum2 = Math.floor(Math.random() * 25 + 1);
+    // Creates two random numbers between 1 and 25
+    let num1 = Math.floor(Math.random() * 25) + 1;
+    let num2 = Math.floor(Math.random() * 25) + 1;
 
-    if (operation === 'add') {
-        displayAddtion(randomNum1, randomNum2);
+    if (operation === "add") {
+        displayAddition(num1, num2);
     } else {
-        alert(`Sorry. I can't hack that ${operation} :/`);
-        throw `Unknown opeartion: ${operation}. Quiting game`;
+        alert(`We can't hack that ${operation} yet`);
+        throw `Operation unknown: ${operation}. Quiting`;
     }
-}
 
-function checkAnswer() { }
+}
 
 /**
- * "Grab those two numbers and the operator, then hand me the right answer!"
+ * Match the answer with what's in that calculateCorrectAnswer array's first slot.
+ */
+function checkAnswer() {
+
+    let guess = parseInt(document.getElementById("answer-box").value);
+    let [answer, operation] = calculateCorrectAnswer();
+
+
+    guess === answer
+        ? alert('You\'ve got it right. Way to go!')
+        : alert(`Awwww.... you've guessed ${guess}. The correct answer is ${answer}!`);
+    play(operation);
+
+}
+
+/**
+ * Grab those two numbers and the operator, then hand me the right answer!
  */
 function calculateCorrectAnswer() {
-    let operand1 = Number.parseInt(document.querySelector('#operand1').innerText);
-    let operand2 = Number.parseInt(document.querySelector('#operant2'.innerText));
-    let operator = document.querySelector('#operator').innerText;
+    let operand1 = parseInt(document.getElementById('operand-1').innerText);
+    let operand2 = parseInt(document.getElementById('operand-2').innerText);
+    let operator = document.getElementById("operator").innerText;
 
-    switch (operator) {
-        case '+':
-            return [operand1 + operand2, 'add'];
-        case '-':
-            return [operand1 - operand2, 'multiply'];
-        case '*':
-            return [operand1 * operand2, 'divide'];
-        default:
-            alert(`${operator} isn't avalaible`)
-            throw `Unimplemented operator: ${operator}. Quiting game`
+    if (operator === "+") {
+        return [operand1 + operand2, "add"];
+    } else {
+        alert(`Unimplemented operator ${operator}`);
+        throw `Unimplemented operator ${operator}. Quitin'`;
     }
+
 }
 
-function incrementScore() { }
+function incrementScore() {
 
-function incrementWrongAnswer() { }
-
-function displayAddtion(operand1, operand2) {
-    document.querySelector('#operand1').textContent = operand1;
-    document.querySelector('#operand2').textContent = operand2;
-    document.querySelector('#operator').textContent = '+';
 }
 
-function displayDivision() { }
+function incrementWrongAnswer() {
 
-function displayMultiplication() { }
+}
 
-function displaySubtraction() { }
+function displayAddition(operand1, operand2) {
 
+    document.getElementById('operand-1').textContent = operand1;
+    document.getElementById('operand-2').textContent = operand2;
+    document.getElementById('operator').textContent = "+";
 
+}
 
+function displaySubtract() {
 
+}
+
+function displayMultiply() {
+
+}
 
